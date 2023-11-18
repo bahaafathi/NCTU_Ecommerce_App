@@ -1,6 +1,13 @@
 package com.example.women_accessories.model;
 
-public class Product {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+
+///treat this class just as normal model and don't give a fuck about "Parcelable" shit
+// this is just to solve a problem related to passing objects from screen to another
+public class Product implements Parcelable {
+
     private String name;
     private String size;
     private String color;
@@ -13,6 +20,40 @@ public class Product {
         this.color = color;
         this.price = price;
         this.imageResourceId = imageResourceId;
+    }
+
+    protected Product(Parcel in) {
+        name = in.readString();
+        size = in.readString();
+        color = in.readString();
+        price = in.readDouble();
+        imageResourceId = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(size);
+        dest.writeString(color);
+        dest.writeDouble(price);
+        dest.writeInt(imageResourceId);
     }
 
     public String getName() {
@@ -35,15 +76,5 @@ public class Product {
         return imageResourceId;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", size='" + size + '\'' +
-                ", color='" + color + '\'' +
-                ", price=" + price +
-                ", imageResourceId=" + imageResourceId +
-                '}';
-    }
-
 }
+

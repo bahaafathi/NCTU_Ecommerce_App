@@ -1,6 +1,7 @@
 package com.example.women_accessories;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class ProductListActivity extends AppCompatActivity {
     private static List<Product> productList = generateProductList();
-    private List<Product> cartItemList = new ArrayList<>();
+    private ArrayList<Product> cartItemList = new ArrayList<>();
     private Button buttonShoppingCart;
 
     @Override
@@ -32,7 +33,9 @@ public class ProductListActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        //the second parameter is a callback function ->>
+        // * When a product is clicked, it is added to the shopping cart,
+        // * and the shopping cart button text is updated.
         ProductAdapter adapter = new ProductAdapter(productList, product -> {
             addToCart(product);
             updateShoppingCartButtonText();
@@ -43,9 +46,6 @@ public class ProductListActivity extends AppCompatActivity {
 
     private void addToCart(Product product) {
         cartItemList.add(product);
-        // Optionally, you can update the UI or perform other actions when a product is added to the cart
-        System.out.println(cartItemList);
-
     }
 
     private void updateShoppingCartButtonText() {
@@ -53,12 +53,14 @@ public class ProductListActivity extends AppCompatActivity {
         buttonShoppingCart.setText("Shopping Cart (" + cartSize + ")");
     }
 
+    //this method will invoke when you press on the "Shopping Cart" Button
     public void viewShoppingCart(View view) {
 
         if (!cartItemList.isEmpty()) {
             Intent intent = new Intent(this, CartActivity.class);
-//            intent.putParcelableArrayListExtra("cartItemList", (ArrayList<? extends Parcelable>) cartItemList);
-//            intent.putExtra("cartItemList", (Serializable) cartItemList);
+
+            //passing all added CartItems to the Shopping Cart Screen
+            intent.putParcelableArrayListExtra("cartItemList", new ArrayList<>(cartItemList));
 
             startActivity(intent);
         } else {

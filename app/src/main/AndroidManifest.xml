@@ -13,13 +13,21 @@
         android:theme="@style/Theme.Women_accessories"
         tools:targetApi="31">
         <activity
-            android:name=".CartActivity"
+            android:name=".SuccessActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
+            android:name=".CartActivity"
+            android:screenOrientation="portrait"
+            android:exported="false"
+            />
+        <activity
             android:name=".ProductListActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
