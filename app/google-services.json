@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "852646859097",
+    "project_id": "nctu-77e7b",
+    "storage_bucket": "nctu-77e7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852646859097:android:92f9e214dfd7058b31bc48",
+        "android_client_info": {
+          "package_name": "com.example.women_accessories"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVlcfWxjH-2nqKYSSyeh86it6twNfPZpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
