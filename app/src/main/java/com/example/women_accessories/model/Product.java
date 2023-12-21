@@ -8,26 +8,27 @@ import android.os.Parcelable;
 // this is just to solve a problem related to passing objects from screen to another
 public class Product implements Parcelable {
 
-    private String name;
+    private String title;
     private String size;
     private String color;
     private double price;
-    private int imageResourceId;
 
-    public Product(String name, String size, String color, double price, int imageResourceId) {
-        this.name = name;
+    private String image;
+
+    public Product(String title, String size, String color, double price, String image) {
+        this.title = title;
         this.size = size;
         this.color = color;
         this.price = price;
-        this.imageResourceId = imageResourceId;
+        this.image = image;
     }
 
     protected Product(Parcel in) {
-        name = in.readString();
+        title = in.readString();
         size = in.readString();
         color = in.readString();
         price = in.readDouble();
-        imageResourceId = in.readInt();
+        image = in.readString();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -49,15 +50,16 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
+        dest.writeString(title);
         dest.writeString(size);
         dest.writeString(color);
         dest.writeDouble(price);
-        dest.writeInt(imageResourceId);
+        dest.writeString(image);
+
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getSize() {
@@ -72,9 +74,9 @@ public class Product implements Parcelable {
         return price;
     }
 
-    public int getImageResourceId() {
-        return imageResourceId;
-    }
 
+    public String getImage() {
+        return image;
+    }
 }
 

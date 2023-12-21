@@ -6,20 +6,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.women_accessories.adapter.CartAdapter;
 import com.example.women_accessories.model.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
 
-    private ArrayList<Product> cartItemList;
+    private List<Product> cartItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
             CartAdapter adapter = new CartAdapter(cartItemList);
             recyclerView.setAdapter(adapter);
 
+            cartItemList.forEach(product -> System.out.println(product.getPrice()));
 
             // Calculate and display the final price
             double finalPrice = calculateFinalPrice(cartItemList);
@@ -47,12 +46,12 @@ public class CartActivity extends AppCompatActivity {
         // Handle the "Buy" button click
         Button btnBuy = findViewById(R.id.btnBuy);
         btnBuy.setOnClickListener(v -> {
-            Intent intent = new Intent(CartActivity.this, SuccessActivity.class);
+            Intent intent = new Intent(CartActivity.this, VisaDetailsActivity.class);
             startActivity(intent);
         });
 
     }
-    private double calculateFinalPrice(ArrayList<Product> cartItemList) {
+    private double calculateFinalPrice(List<Product>cartItemList) {
         double totalPrice = 0;
         for (Product product : cartItemList) {
             totalPrice += product.getPrice();

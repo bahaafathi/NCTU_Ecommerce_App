@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextVisaNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Visa Number"/>
+
+    <EditText
+        android:id="@+id/editTextVisaType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextVisaNumber"
+        android:layout_marginTop="16dp"
+        android:hint="Visa Type"/>
+
+    <EditText
+        android:id="@+id/editTextIssueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextVisaType"
+        android:layout_marginTop="16dp"
+        android:hint="Issue Date"/>
+
+    <EditText
+        android:id="@+id/editTextPlaceOfIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextIssueDate"
+        android:layout_marginTop="16dp"
+        android:hint="Place of Issue"/>
+
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="202dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPlaceOfIssue"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="124dp"
+        android:layout_marginEnd="121dp"
+        android:text="Buy" />
+</RelativeLayout>

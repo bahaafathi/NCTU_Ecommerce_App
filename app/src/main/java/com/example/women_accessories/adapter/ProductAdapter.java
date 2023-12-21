@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.women_accessories.R;
 import com.example.women_accessories.model.Product;
 
@@ -24,12 +25,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public interface OnItemClickListener {
         void onItemClick(Product product);
     }
+
     public ProductAdapter(List<Product> productList, OnItemClickListener listener) {
         this.productList = productList;
         this.listener = listener;
     }
-
-
 
 
     @NonNull
@@ -43,8 +43,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
 
-        holder.imageViewProduct.setImageResource(product.getImageResourceId());
-        holder.textViewName.setText(product.getName());
+//        holder.imageViewProduct.setImageResource(product.getImageResourceId());
+
+        // Load image using Glide
+        Glide.with(holder.imageViewProduct.getContext())
+                .load(product.getImage())
+                .placeholder(R.drawable.product_placeholder) // Placeholder image while loading
+                .error(R.drawable.product_placeholder) // Error image if the load fails
+                .into(holder.imageViewProduct);
+        holder.textViewName.setText(product.getTitle());
         holder.textViewDetails.setText(String.format(Locale.getDefault(), "Size: %s | Color: %s | Price: $%.2f",
                 product.getSize(), product.getColor(), product.getPrice()));
 
@@ -61,6 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         TextView textViewName;
         TextView textViewDetails;
         Button buttonAddToCart;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewProduct = itemView.findViewById(R.id.imageViewProduct);

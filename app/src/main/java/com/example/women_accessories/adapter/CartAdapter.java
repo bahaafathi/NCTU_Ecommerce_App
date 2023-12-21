@@ -1,6 +1,5 @@
 package com.example.women_accessories.adapter;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.women_accessories.R;
 import com.example.women_accessories.model.Product;
 
@@ -19,9 +19,9 @@ import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
-    private ArrayList<Product> cartItemList;
+    private List<Product> cartItemList;
 
-    public CartAdapter(ArrayList<Product> cartItemList) {
+    public CartAdapter(List<Product> cartItemList) {
         this.cartItemList = cartItemList;
     }
 
@@ -35,9 +35,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = cartItemList.get(position);
-        holder.ItemCartImage.setImageResource(product.getImageResourceId());
+//        holder.ItemCartImage.setImageResource(product.getImageResourceId());
+        Glide.with(holder.ItemCartImage.getContext())
+                .load(product.getImage())
+                .placeholder(R.drawable.product_placeholder) // Placeholder image while loading
+                .error(R.drawable.product_placeholder) // Error image if the load fails
+                .into(holder.ItemCartImage);
 
-        holder.textViewCartItemName.setText(product.getName());
+        holder.textViewCartItemName.setText(product.getTitle());
         holder.textViewCartItemDetails.setText(String.format(Locale.getDefault(), "Size: %s | Color: %s | Price: $%.2f",
                 product.getSize(), product.getColor(), product.getPrice()));
     }
